@@ -1,0 +1,42 @@
+<div class="zone">
+    <div class="row e_logo">
+        <div class="col-md-12 center_text">
+            <img style="height:150px;" style="height:fit-content;" src="img/logo.png">
+        </div>
+    </div>
+    <div class="row center_item">
+        <div class="col-md-12 mt-5 center_text">
+            <h4 class="center_text">İyi Günler</h4>
+            <img style="height: 100px;background: #00709461;padding: 5px;" class="md-avatar rounded-circle"
+            src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20).jpg" />
+            <p>A İşletmesi</p>
+        </div>
+    </div>
+    <form id="formId">
+        <div class="row mt-5">
+            <div id="loginForm" class="col-md-12">
+                <input type="number" name="phone" id="login_phone" value="javascript(app.getFromLocal('userinfo_phone'))"
+                placeholder="0555AAABBCC" class="form-input" data-required-message="Zorunlu alan" required data-msg-containerid="requiredError">
+                <div id="requiredError"></div>
+                <input type="password" name="password" id="login_password" placeholder="Şifre" class="form-input" minlength="5" data-minlength-message="Lütfen en az 5 karakter girin !" data-required-message="Zorunlu alan" required data-msg-containerid="minlenError">
+                <div id="minlenError"></div>
+                <div class="checkbox">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button onclick="app.actionLogin()" id="actionlogin_button" class="form-green-button">
+                    Giriş
+                </button>
+            </div>
+            <div class="col-6">
+                <a onclick="app.run('register');" href="#">Üye Ol</a>
+            </div>
+            <div class="col-6 text-right">
+                <a onclick="app.run('resetpassword');" href="#">Şifremi Unuttum</a>
+            </div>
+        </div>
+    </form>
+</div>
