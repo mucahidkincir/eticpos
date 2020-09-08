@@ -41,7 +41,7 @@
                             <div class="mb-3 mt-2 mt-2">
                                 <div class="form-check pull-left">
                                     <label class="checkbox-button-container">Kullanıcı Sözleşmesi
-                                        <input type="checkbox" data-required-message="Zorunlu alan" required data-msg-containerid="requiredError1">
+                                        <input type="checkbox" name="ks" data-required-message="Zorunlu alan" required data-msg-containerid="requiredError1">
                                         <span class="checkbox-button-checkmark"></span>
                                         <a onclick="app.viewmodalexternal(app.defines.external_content.tos, 'Kullanıcı Sözleşmesi')"><img
                                             src="img/icons/link.svg"></a>
@@ -54,7 +54,7 @@
                                 <div class="mb-3 mt-2">
                                     <div class="form-check">
                                         <label class="checkbox-button-container">KVKK Aydınlatma Metni
-                                            <input type="checkbox" data-required-message="Zorunlu alan" required data-msg-containerid="requiredError2">
+                                            <input type="checkbox" name="kvkk" data-required-message="Zorunlu alan" required data-msg-containerid="requiredError2">
                                             <span class="checkbox-button-checkmark"></span>
                                             <a
                                             onclick="app.viewmodalexternal(app.defines.external_content.tos, 'KVKK Aydınlatma Metni')"><img
@@ -68,7 +68,7 @@
                                 <div class="mb-3 mt-2">
                                     <div class="form-check">
                                         <label class="checkbox-button-container">KVKK Açık Rıza Sözleşmesi
-                                            <input type="checkbox" data-required-message="Zorunlu alan" required data-msg-containerid="requiredError3">
+                                            <input type="checkbox" name="kvkk2" data-required-message="Zorunlu alan" required data-msg-containerid="requiredError3">
                                             <span class="checkbox-button-checkmark"></span>
                                             <a
                                             onclick="app.viewmodalexternal(app.defines.external_content.tos, 'KVKK Açık Rıza Sözleşmesi')"><img
@@ -82,7 +82,7 @@
                                 <div class="mb-3 mt-2">
                                     <div class="form-check">
                                         <label class="checkbox-button-container">Çerçeve Sözleşmesi
-                                            <input type="checkbox" data-required-message="Zorunlu alan" required data-msg-containerid="requiredError4">
+                                            <input type="checkbox" name="cs" data-required-message="Zorunlu alan" required data-msg-containerid="requiredError4">
                                             <span class="checkbox-button-checkmark"></span>
                                             <a
                                             onclick="app.viewmodalexternal(app.defines.external_content.tos, 'Çerçeve Sözleşmesi')"><img
@@ -107,7 +107,7 @@
                             </div>
                             <div class="form-group mt-2">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <button id="handle_register_customer" href="#" onclick="app.handleRegisterCustomer()" class="form-green-button"> Devam
+                                    <button id="handle_register_customer" href="#"  class="form-green-button"> Devam
                                     </button>
                                 </div>
                             </div>
@@ -127,3 +127,30 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+
+
+       var buttonFormValidate = new ej.buttons.Button({
+        isPrimary: true
+    });
+       buttonFormValidate.appendTo('#handle_register_customer');
+
+       var options = {
+
+        customPlacement: function (inputElement, errorElement) {
+            inputElement.parentElement.appendChild(errorElement);
+        }
+    };
+
+
+    var formObj = new ej.inputs.FormValidator('#formId', options);
+    document.getElementById('formId').addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (formObj.validate()) {
+
+         app.handleRegisterCustomer();
+
+     }
+ });
+</script>

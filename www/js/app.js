@@ -50,7 +50,7 @@ class EmlakPosApp {
 
 
         run(view) {
-           
+         
             this.view = view;
             console.log("App::run(" + view + ")");
             $("div#main_messages").hide();
@@ -119,101 +119,64 @@ class EmlakPosApp {
     }
 
     actionLogin() {
-       var act_this = this;
-       // Initialize the Submit Button.
-       var buttonFormValidate = new ej.buttons.Button({
-        isPrimary: true
-    });
-       buttonFormValidate.appendTo('#actionlogin_button');
+     
+        this.saveToLocal('user_info_login_phone', $("input#login_phone").val());
+        ac.clearAuthParams();
+        ac.setAuthParam('phone', $("input#login_phone").val());
+        ac.setAuthParam('password', $("input#login_password").val());
+        ac.setCallAction('gettoken');
+        ac.callApi();
+        return;
+        
 
-       var options = {
-        // Initialize the CustomPlacement.
-        customPlacement: function (inputElement, errorElement) {
-            inputElement.parentElement.appendChild(errorElement);
-        }
-    };
-
-    // Initialize the FormValidator.
-    var formObj = new ej.inputs.FormValidator('#formId', options);
-    document.getElementById('formId').addEventListener("submit", function (e) {
-        e.preventDefault();
-        if (formObj.validate()) {
-            act_this.saveToLocal('user_info_login_phone', $("input#login_phone").val());
-            ac.clearAuthParams();
-            ac.setAuthParam('phone', $("input#login_phone").val());
-            ac.setAuthParam('password', $("input#login_password").val());
-            ac.setCallAction('gettoken');
-            ac.callApi();
-            return;
-        }
-    });
-
-}
-
-getToken() {
-    return this.getFromLocal('token');
-}
-
-setToken(token) {
-    this.saveToLocal('token', token);
-    return this.ac.setAuthParam('token', token);
-}
-
-renderAlertPage(data) {
-    if (data.header) {
-        $("#alert_view_header").html(data.header);
     }
-    if (data.body) {
-        $("#alert_view_body").html(data.body);
+
+    getToken() {
+        return this.getFromLocal('token');
     }
-}
 
+    setToken(token) {
+        this.saveToLocal('token', token);
+        return this.ac.setAuthParam('token', token);
+    }
 
-viewdashboard() {
-    this.loadTemplate('pages/dashboard', 'main_body', 'renderDashboard');
-}
-
-renderDashboard() {
-    $("span#userinfo_name").html(
-        this.getFromLocal('user_info_firstname')
-        + " " + this.getFromLocal('user_info_lastname')
-        );
-}
-
-viewregister() {
-    this.loadTemplate('pages/register/register', 'main_body');
-}
-
-viewregistercustomer() {
-    this.loadTemplate('pages/register/registercustomer', 'main_body');
-}
-
-handleRegisterCustomer() {
-
-    var act_this = this;
-       // Initialize the Submit Button.
-       var buttonFormValidate = new ej.buttons.Button({
-        isPrimary: true
-    });
-       buttonFormValidate.appendTo('#handle_register_customer');
-
-       var options = {
-        // Initialize the CustomPlacement.
-        customPlacement: function (inputElement, errorElement) {
-            inputElement.parentElement.appendChild(errorElement);
+    renderAlertPage(data) {
+        if (data.header) {
+            $("#alert_view_header").html(data.header);
         }
-    };
+        if (data.body) {
+            $("#alert_view_body").html(data.body);
+        }
+    }
 
-    // Initialize the FormValidator.
-    var formObj = new ej.inputs.FormValidator('#formId', options);
-    document.getElementById('formId').addEventListener("submit", function (e) {
-        e.preventDefault();
-        if (formObj.validate()) {
+
+    viewdashboard() {
+        this.loadTemplate('pages/dashboard', 'main_body', 'renderDashboard');
+    }
+
+    renderDashboard() {
+        $("span#userinfo_name").html(
+            this.getFromLocal('user_info_firstname')
+            + " " + this.getFromLocal('user_info_lastname')
+            );
+    }
+
+    viewregister() {
+        this.loadTemplate('pages/register/register', 'main_body');
+    }
+
+    viewregistercustomer() {
+        this.loadTemplate('pages/register/registercustomer', 'main_body');
+    }
+
+    handleRegisterCustomer() {
+
+        
              // TODO //
              let phone = $("input#phone").val();
              let e = $("input#e").val();
 
-             act_this.saveToLocal('registercustomerdata',
+             this.saveToLocal('registercustomerdata',
              {
                 phone: phone,
                 e: e
@@ -223,14 +186,13 @@ handleRegisterCustomer() {
                 body: 'Şu an başvurunuzu kayıt edemiyoruz. <br/>Başvurunuz için lütfen daha sonra tekrar deneyiniz.'
             };
             // this.loadTemplate('pages/warning', 'main_body', 'renderAlertPage', data);
-            act_this.loadTemplate('pages/smsvalidation', 'main_body');
+            this.loadTemplate('pages/smsvalidation', 'main_body');
+            
+            
+
         }
-    });
-       
 
-    }
-
-    handleRegisterNewCustomer() {
+        handleRegisterNewCustomer() {
 
         //TODO //
         let data = {

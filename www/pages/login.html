@@ -27,7 +27,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <button onclick="app.actionLogin()" id="actionlogin_button" class="form-green-button">
+                <button  id="actionlogin_button" class="form-green-button">
                     Giriş
                 </button>
             </div>
@@ -40,3 +40,28 @@
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    
+       // Initialize the Submit Button.
+       var buttonFormValidate = new ej.buttons.Button({
+        isPrimary: true
+    });
+       buttonFormValidate.appendTo('#actionlogin_button');
+
+       var options = {
+        // Initialize the CustomPlacement.
+        customPlacement: function (inputElement, errorElement) {
+            inputElement.parentElement.appendChild(errorElement);
+        }
+    };
+
+    // Initialize the FormValidator.
+    var formObj = new ej.inputs.FormValidator('#formId', options);
+    document.getElementById('formId').addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (formObj.validate()) {
+            app.actionLogin();
+        }
+    });
+</script>
